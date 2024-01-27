@@ -2,92 +2,90 @@ using UnityEngine;
 using System;
 using System.IO;
 
-namespace Exstra
+
+public class GameData : ExtendedMonoBehaviour
 {
-    public class GameData : ExtendedMonoBehaviour
-    {
-        #region Singletone
+	#region Singletone
 
-        public static GameData instance { get; private set; }
+	public static GameData instance { get; private set; }
 
-        #endregion
+	#endregion
 
-        public static Action onInitialized;
+	public static Action onInitialized;
 
-        [HideInInspector] public bool initialized = false;
+	[HideInInspector] public bool initialized = false;
 
-        [SerializeField] KeyCode coinKeyCode = KeyCode.C;
-        [SerializeField] int coinsGiveAmount = 100;
+	[SerializeField] KeyCode coinKeyCode = KeyCode.C;
+	[SerializeField] int coinsGiveAmount = 100;
 
-        [Space]
+	[Space]
 
-        public Action onCoinsChanged;
-        public Action onLvlChanged; //might be useful for checking special levels
+	public Action onCoinsChanged;
+	public Action onLvlChanged; //might be useful for checking special levels
 
-        [SerializeField] int coins = 0;
-        [SerializeField] int level = 0;
+	[SerializeField] int coins = 0;
+	[SerializeField] int level = 0;
 
-        public int Coins
-        {
-            get => PlayerPrefs.GetInt("COINS", coins);
-            set
-            {
-                coins = value;
-                PlayerPrefs.SetInt("COINS", value);
-                onCoinsChanged?.Invoke();
-            }
-        }
+	public int Coins
+	{
+		get => PlayerPrefs.GetInt("COINS", coins);
+		set
+		{
+			coins = value;
+			PlayerPrefs.SetInt("COINS", value);
+			onCoinsChanged?.Invoke();
+		}
+	}
 
-        public int Level
-        {
-            get => PlayerPrefs.GetInt("LEVEL", level);
-            set
-            {
-                level = value;
-                PlayerPrefs.SetInt("LEVEL", value);
-                onLvlChanged?.Invoke();
-            }
-        }
+	public int Level
+	{
+		get => PlayerPrefs.GetInt("LEVEL", level);
+		set
+		{
+			level = value;
+			PlayerPrefs.SetInt("LEVEL", value);
+			onLvlChanged?.Invoke();
+		}
+	}
 
-        private void Awake()
-        {
-            if (instance == null) { instance = this; }
-            else { Destroy(this.gameObject); }
+	private void Awake()
+	{
+		if (instance == null) { instance = this; }
+		else { Destroy(this.gameObject); }
 
-            if (IsFirstTime())
-                SaveData();
+		if (IsFirstTime())
+			SaveData();
 
-            LoadData();
+		LoadData();
 
-            initialized = true;
-            onInitialized?.Invoke();
-        }
+		initialized = true;
+		onInitialized?.Invoke();
+	}
 
-        private void SaveData()
-        {
-            coins = Coins;
-            level = Level;
-        }
+	private void SaveData()
+	{
+		coins = Coins;
+		level = Level;
+	}
 
-        private void LoadData()
-        {
-            coins = Coins;
-            level = Level;
-        }
+	private void LoadData()
+	{
+		coins = Coins;
+		level = Level;
+	}
 
-        private void Update()
-        {
-            EDITOR_ONLY();
-        }
+	private void Update()
+	{
+		EDITOR_ONLY();
+	}
 
-        void EDITOR_ONLY()
-        {
+	void EDITOR_ONLY()
+	{
 #if UNITY_EDITOR
             if (Input.GetKeyDown(coinKeyCode))
             {
                 Coins += coinsGiveAmount;
             }
 #endif
-        }
-    }
+	}
 }

@@ -2,8 +2,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-namespace Exstra
-{
     public class AnimationUnityEventTrigger : MonoBehaviour
     {
         public UnityEvent<int> Punch;
@@ -43,4 +41,3 @@ namespace Exstra
             OnAnimationEnd?.Invoke();
         }
     }
-}
