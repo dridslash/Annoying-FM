@@ -19,11 +19,13 @@ public class PlayerController : ExtendedMonoBehaviour
 	//CoffeeManager coffeeManager;
 	[HideInInspector] public bool caught;
 	bool sleeping = true;
+	PlayerActions playerActions;
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
 		animator = transform.GetChild(0).GetComponent<Animator>();
 		//coffeeManager = GetComponent<CoffeeManager>();
+		playerActions = GetComponent<PlayerActions>();
 	}
 
 	private void Start()
@@ -173,4 +175,22 @@ public class PlayerController : ExtendedMonoBehaviour
 
 		return false;
 	}
+
+	//private void OnTriggerEnter(Collider other)
+	//{
+	//	if (other.gameObject.tag == "OldMan")
+	//	{
+	//		playerActions.Prompt("Tap -Space- to talk");
+	//		OldMan.instance.StartDialogue();
+	//		//Old man voice
+	//		//Choices
+	//	}
+	//}
+	//private void OnTriggerExit(Collider other)
+	//{
+	//	if (other.gameObject.tag == "OldMan")
+	//	{
+	//		playerActions.Prompt("");
+	//	}
+	//}
 }

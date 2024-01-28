@@ -28,9 +28,6 @@ public class PlayerActions : MonoBehaviour
 			Prompt("");
 			waitingForWakeUp = false;
 		}
-
-
-
 		//if(waitingForWakeUp && Input.get)
 	}
 	public void Prompt(string text)
