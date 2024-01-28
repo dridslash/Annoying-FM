@@ -20,6 +20,7 @@ public class PlayerController : ExtendedMonoBehaviour
 	[HideInInspector] public bool caught;
 	bool sleeping = true;
 	PlayerActions playerActions;
+
 	private void Awake()
 	{
 		rb = GetComponent<Rigidbody>();
@@ -60,7 +61,7 @@ public class PlayerController : ExtendedMonoBehaviour
 		ChooseRotation();
 		if (Input.GetKeyDown(KeyCode.LeftCommand) || Input.GetKeyDown(KeyCode.RightCommand))
 		{
-			Drink(); //Attack
+			//Drink(); //Attack
 		}
 		//Keep falling commented until replaced with drinking coffee
 		//if (IsDrinking()) // && coffeeManager)
@@ -176,21 +177,46 @@ public class PlayerController : ExtendedMonoBehaviour
 		return false;
 	}
 
-	//private void OnTriggerEnter(Collider other)
-	//{
-	//	if (other.gameObject.tag == "OldMan")
-	//	{
-	//		playerActions.Prompt("Tap -Space- to talk");
-	//		OldMan.instance.StartDialogue();
-	//		//Old man voice
-	//		//Choices
-	//	}
-	//}
-	//private void OnTriggerExit(Collider other)
-	//{
-	//	if (other.gameObject.tag == "OldMan")
-	//	{
-	//		playerActions.Prompt("");
-	//	}
-	//}
+	private void OnTriggerEnter(Collider other)
+	{
+		//Debug.Log("other.gameObject.tag: " +other.gameObject.tag );
+
+		int OldManNarrationsLeft = DialogueManager.instance.NarratorNarrationsLeft("OldMan");
+		//Debug.Log("returned OldManNarrationsLeft: " + OldManNarrationsLeft);
+		if (other.gameObject.tag == "OldMan" && OldManNarrationsLeft > 0)
+		{
+			playerActions.Prompt("(Tap -Space- to talk)");
+			playerActions.CanStartNarrator(true, "OldMan");
+			DialogueManager.instance.talkedToOldMan = true;
+		}
+
+		int BikeRacerNarrationsLeft = DialogueManager.instance.NarratorNarrationsLeft("BikeRacer");
+		if (other.gameObject.tag == "BikeRacer" && BikeRacerNarrationsLeft > 0 && DialogueManager.instance.talkedToOldMan)
+		{
+			playerActions.Prompt("(Tap -Space- to talk)");
+			playerActions.CanStartNarrator(true, "BikeRacer");
+			DialogueManager.instance.talkedToBikeRacer = true;
+		}
+	}
+
+	private void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.tag == "OldMan")
+		{
+			playerActions.Prompt("");
+			playerActions.CanStartNarrator(false, "");
+			DialogueManager.instance.StopNarration();
+		}
+		if (other.gameObject.tag == "BikeRacer")
+		{
+			playerActions.Prompt("");
+			playerActions.CanStartNarrator(false, "");
+			DialogueManager.instance.StopNarration();
+			if (DialogueManager.instance.talkedToBikeRacer)
+			{
+				DialogueManager.instance.enableAfterTalkingToBikeRacer.SetActive(true);
+				DialogueManager.instance.disableAfterTalkingToBikeRacer.SetActive(false);
+			}
+		}
+	}
 }

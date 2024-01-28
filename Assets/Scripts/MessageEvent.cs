@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class MessageEvent : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	public bool isPlayerMessage;
+	[TextAreaAttribute]
+	public string message;
+	[Header("insert same sound name used in AudioManager")]
+	public string speechClipName;
+	public bool completedMessageEvent;
+	public bool isLastMessageEvent;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	public void Play()
+	{
+		AudioManager.instance.Play(speechClipName);
+		DialogueManager.instance.DisplayMessage(message, isLastMessageEvent,isPlayerMessage);
+		completedMessageEvent = true;
+	}
 }

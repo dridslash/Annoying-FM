@@ -1,40 +1,37 @@
-//using System.Collections;
-//using System.Collections.Generic;
-//using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-//public class Narrator : MonoBehaviour
-//{
-//	public List<NarrativeEvent> narrativeEvents;
-//	private void Start() {
-//		narrativeEvents = new List<NarrativeEvent>(GetComponentsInChildren<NarrativeEvent>());
-//	}
+public class Narrator : MonoBehaviour
+{
+	public string narratorName;
+	public List<NarrativeEvent> narrativeEvents;
+	public bool completedNarrator;
+	private void Awake()
+	{
+		narrativeEvents = new List<NarrativeEvent>(GetComponentsInChildren<NarrativeEvent>());
+	}
+	public void Play()
+	{
+		for (int i = 0; i < narrativeEvents.Count; i++)
+		{
+			NarrativeEvent n = narrativeEvents[i];
+			if (!n.completedNarrativeEvent)
+			{
+				if (i == narrativeEvents.Count - 1)
+					n.isLastNarrativeEvent = true;
+				else
+					n.isLastNarrativeEvent = false;
 
-//	public void StartNarrativeEvent(string eventName)
-//	{
-//		// Find narrative event with the given name
-//		NarrativeEvent narrativeEvent = narrativeEvents.Find(n => n.name == eventName);
-//		if (narrativeEvent == null)
-//		{
-//			Debug.LogWarning($"Narrative event with name {eventName} not found");
-//			return;
-//		}
+				n.Play();
+				return;
+			}
 
-//		// Start narrative event
-//		narrativeEvent.StartEvent();
-//	}
-
-//	public void EndNarrativeEvent(string eventName)
-//	{
-//		// Find narrative event with the given name
-//		NarrativeEvent narrativeEvent = narrativeEvents.Find(n => n.name == eventName);
-//		if (narrativeEvent == null)
-//		{
-//			Debug.LogWarning($"Narrative event with name {eventName} not found");
-//			return;
-//		}
-
-//		// End narrative event
-//		narrativeEvent.EndEvent();
-//	}
-
-//}
+			if (i == narrativeEvents.Count - 1)
+			{
+				completedNarrator = true;
+				DialogueManager.instance.StopNarration();
+			}
+		}
+	}
+}

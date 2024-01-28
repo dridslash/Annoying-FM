@@ -28,7 +28,8 @@ public class UIManager : ExtendedMonoBehaviour
 	[Header("Other")]
 	[SerializeField] public Image blackScreen;
 	[SerializeField] public TMP_Text prompt;
-	
+	[SerializeField] public GameObject messageBox;
+	[SerializeField] public TMP_Text messageText;
 
 	private void Awake()
 	{
@@ -165,8 +166,15 @@ public class UIManager : ExtendedMonoBehaviour
 		DOTween.Kill(coinText.transform);
 		coinText.transform.DOScale(Vector3.one, UISpeed);
 	}
-	public void SetBlackScreen(bool dark, float time=0)
+	public void SetBlackScreen(bool dark, float time = 0)
 	{
 		blackScreen.DOFade(dark ? 1 : 0, time);
+	}
+
+	public void DisplayMessage(string message, bool isLastMessageEvent)
+	{
+		messageText.text = message;
+		messageText.transform.localScale = Vector3.zero;
+		messageText.transform.DOScale(Vector3.one, UISpeed);
 	}
 }

@@ -58,11 +58,11 @@ public class LevelManager : ExtendedMonoBehaviour
 
 	void ONLY_EDITOR()
 	{
-		if (Input.GetKeyDown(KeyCode.N))
-			NextLvl();
+		//if (Input.GetKeyDown(KeyCode.N))
+		//	NextLvl();
 
-		if (Input.GetKeyDown(KeyCode.B))
-			PreviousLvl();
+		//if (Input.GetKeyDown(KeyCode.B))
+		//	PreviousLvl();
 	}
 
 	public void NextLvl()

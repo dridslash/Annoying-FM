@@ -16,14 +16,6 @@ public class OldMan : MonoBehaviour
 			return;
 		}
 	}
-	public void StartDialogue()
-	{
-		//DialogueManager.instance.StartDialogue("OldMan");
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
-	}
+	
+	
 }

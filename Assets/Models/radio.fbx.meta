@@ -6,7 +6,22 @@ ModelImporter:
   - first:
       74: 6759086803382991731
     second: Armature|Armature|Armature|Armature|mixamo.com|Layer0
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FM box
+    second: {fileID: 2100000, guid: 5b506feca3cb54c449c8ce9a04759db9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Screen
+    second: {fileID: 2100000, guid: 49a0f2b8a56204d589a8af357edfe4c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Speaker
+    second: {fileID: 2100000, guid: 7ce6cc33d365f4944833fe91663a382e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

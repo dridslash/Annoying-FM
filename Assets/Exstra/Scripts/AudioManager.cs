@@ -29,6 +29,8 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.ignoreListenerPause = s.ignorePause;
         }
+
+		Play("AnnoyingRadioMusic");
     }
 
     public void Play(string name)
