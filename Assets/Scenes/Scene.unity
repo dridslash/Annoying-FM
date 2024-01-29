@@ -9425,8 +9425,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'the game developers were in a wild rush during a game jam and, whoops,
-    they totally forgot to code an ''off'' button for your radio curse! '
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: e285192d086b97346aeabd814d518444, type: 2}
   m_sharedMaterial: {fileID: -6116762760106175916, guid: e285192d086b97346aeabd814d518444,
@@ -9454,12 +9453,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 106
+  m_fontSize: 98
   m_fontSizeBase: 106
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 98
+  m_fontSizeMax: 98
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512

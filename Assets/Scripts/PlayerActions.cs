@@ -22,11 +22,14 @@ public class PlayerActions : MonoBehaviour
 		AudioManager.instance.Play("RadioMusic1");
 	}
 
+float _pressSpaceDelay=0.75f;
+float pressSpaceDelay;
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
+		if (Input.GetKeyDown(KeyCode.Space) && pressSpaceDelay>= _pressSpaceDelay)
 		{
+			pressSpaceDelay=0;
 			if (waitingForWakeUp)
 			{
 				playerController.WakeUp();
@@ -42,6 +45,7 @@ public class PlayerActions : MonoBehaviour
 				waitingForGameEnd = false;
 			}
 		}
+		pressSpaceDelay+=Time.deltaTime;
 		//if(waitingForWakeUp && Input.get)
 	}
 	public void Prompt(string text)

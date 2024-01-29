@@ -19,7 +19,7 @@ public class NarrativeEvent : MonoBehaviour
 			MessageEvent m = messageEvents[i];
 			if (!m.completedMessageEvent)
 			{
-				if(i==messageEvents.Count-1)
+				if (i == messageEvents.Count - 1)
 					m.isLastMessageEvent = true;
 				else
 					m.isLastMessageEvent = false;
@@ -27,12 +27,13 @@ public class NarrativeEvent : MonoBehaviour
 				return;
 			}
 
-			if(i == messageEvents.Count - 1)
+			if (i == messageEvents.Count - 1)
 			{
 				DialogueManager.instance.enableAfterTalkingToOldMan.SetActive(true);
 				DialogueManager.instance.disableAfterTalkingToOldMan.SetActive(false);
 				completedNarrativeEvent = true;
 				DialogueManager.instance.StopNarration();
+				UIManager.instance.prompt.SetText("");
 			}
 		}
 	}
